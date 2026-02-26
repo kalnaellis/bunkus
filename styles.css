@@ -1,0 +1,28 @@
+:root {
+  color-scheme: dark;
+  --bg: #050506;
+  --text: #f8f6ff;
+  --accent: #d386ff;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Inter, Arial, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+.bg { position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle at 20% 20%, rgba(155,98,255,.26), transparent 40%), radial-gradient(circle at 80% 30%, rgba(216,109,255,.2), transparent 35%), linear-gradient(120deg, #060609, #0d0914 55%, #120c1a); }
+#scrollRoot { min-height: 360vh; position: relative; }
+.story { position: sticky; top: 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 4rem 6vw; max-width: 72rem; }
+.hash { text-transform: uppercase; letter-spacing: .4em; font-size: .72rem; opacity: .65; }
+h1 { font-size: clamp(2.5rem, 8vw, 7rem); line-height: .95; text-transform: uppercase; margin: 1rem 0; }
+.sub { max-width: 40rem; opacity: .72; }
+.card { position: fixed; right: 6vw; top: 24vh; width: 300px; border: 1px solid rgba(255,255,255,.25); border-radius: .8rem; padding: 1.2rem; background: rgba(255,255,255,.05); }
+.card .label { text-transform: uppercase; letter-spacing: .2em; font-size: .72rem; opacity: .7; }
+.card svg { margin-top: 1rem; width: 100%; color: var(--accent); }
+.hidden { display: none !important; }
+.spacer { height: 300vh; }
+#cta { position: fixed; left: 50%; bottom: 2rem; transform: translateX(-50%); border-radius: 999px; border: 1px solid rgba(255,255,255,.25); padding: .9rem 1.2rem; background: rgba(255,255,255,.1); color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .16em; }
+#cta.active { background: var(--accent); color: #06030f; border-color: var(--accent); cursor: pointer; }
+dialog { width: min(640px, 92vw); border: 1px solid rgba(255,255,255,.3); background: #0b0b10; color: var(--text); border-radius: 10px; padding: 1.2rem; }
+input { width: 100%; margin-bottom: .8rem; background: transparent; border: 1px solid rgba(255,255,255,.3); color: var(--text); padding: .7rem; border-radius: 6px; }
+.modal-head { display: flex; justify-content: space-between; align-items: center; }
+button { background: var(--accent); border: 0; color: #10081a; border-radius: 6px; padding: .6rem .8rem; font-weight: 600; }
+button.link { background: transparent; color: var(--accent); text-decoration: underline; padding: 0; margin-bottom: .8rem; }
+.case-ref { margin: .8rem 0; padding: .6rem; border: 1px solid rgba(255,255,255,.2); border-radius: 6px; }
+@media (max-width: 900px) { .card { display: none !important; } }
