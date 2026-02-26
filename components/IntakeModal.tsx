@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import FileUpload from "@/components/FileUpload";
 import LegalNotice from "@/components/LegalNotice";
 import type { CTAState } from "@/components/CTAButton";
+import { caseSchema, type CaseInput } from "@/lib/validators";
 
 type IntakeModalProps = {
   open: boolean;
@@ -19,28 +22,25 @@ type CaseSession = {
   folderUrl: string;
 };
 
-const CONSENT_TEXT =
-  "I confirm these files are mine to share and I agree to the processing of my data for case evaluation.";
-
 export default function IntakeModal({ open, ctaState, onClose, onStateChange }: IntakeModalProps) {
   const [showLegal, setShowLegal] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
   const [session, setSession] = useState<CaseSession | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [consent, setConsent] = useState(false);
+
+  const form = useForm<CaseInput>({
+    resolver: zodResolver(caseSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      consent: true,
+      consentTextVersion: "v1"
+    }
+  });
 
   if (!open) return null;
 
-  const submitIntake = async (event: React.FormEvent) => {
-    event.preventDefault();
-
-    if (name.trim().length < 2 || !email.includes("@") || !consent) {
-      setError("Enter a valid name/email and accept consent.");
-      return;
-    }
-
+  const submitIntake = form.handleSubmit(async (values) => {
     try {
       setError(null);
       onStateChange("submitting");
@@ -48,12 +48,7 @@ export default function IntakeModal({ open, ctaState, onClose, onStateChange }: 
       const response = await fetch("/api/case", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          consent,
-          consentTextVersion: "v1"
-        })
+        body: JSON.stringify(values)
       });
 
       if (!response.ok) throw new Error("Intake request failed.");
@@ -65,7 +60,7 @@ export default function IntakeModal({ open, ctaState, onClose, onStateChange }: 
       setError("Could not submit details. Please retry.");
       onStateChange("form_open");
     }
-  };
+  });
 
   const submitUpload = async () => {
     if (!session || files.length === 0) return;
@@ -113,18 +108,18 @@ export default function IntakeModal({ open, ctaState, onClose, onStateChange }: 
               <input
                 placeholder="Name"
                 className="w-full rounded-md border border-white/30 bg-transparent px-3 py-2"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
+                {...form.register("name")}
               />
               <input
                 placeholder="Email"
                 className="w-full rounded-md border border-white/30 bg-transparent px-3 py-2"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                {...form.register("email")}
               />
               <label className="flex items-start gap-2 text-xs text-white/70">
-                <input type="checkbox" className="mt-0.5" checked={consent} onChange={(event) => setConsent(event.target.checked)} />
-                <span>{CONSENT_TEXT}</span>
+                <input type="checkbox" className="mt-0.5" {...form.register("consent")} />
+                <span>
+                  I confirm these files are mine to share and I agree to the processing of my data for case evaluation.
+                </span>
               </label>
               <button
                 type="button"
