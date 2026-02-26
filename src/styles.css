@@ -1,0 +1,27 @@
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Inter, Arial, sans-serif; color: #121214; background: #fff; }
+.app { position: relative; }
+.canvas-wrap { position: fixed; inset: 0; z-index: -1; }
+.panel { min-height: 100vh; display: grid; place-items: center; padding: 6vw; }
+.scene-1 h1 { font-size: clamp(2.6rem, 8vw, 7rem); max-width: 12ch; text-transform: uppercase; line-height: .9; }
+.tiny { margin-top: 1rem; letter-spacing: .3em; font-size: .75rem; }
+.scene-2 { grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; }
+.frame { width: min(70vw, 1000px); aspect-ratio: 16/9; overflow: hidden; border-radius: 14px; box-shadow: 0 30px 80px rgba(0,0,0,.12); }
+.frame img, .subject img { width: 100%; height: 100%; object-fit: cover; }
+.subject { position: absolute; width: min(25vw, 360px); right: 18vw; top: 26vh; border-radius: 12px; overflow: hidden; }
+.side { position: absolute; right: 8vw; top: 45vh; font-size: clamp(1rem, 2.2vw, 2rem); font-weight: 700; max-width: 18ch; }
+.recompose { font-size: clamp(2rem, 7vw, 6rem); font-weight: 700; text-transform: uppercase; text-align: center; }
+.scene-4 h2 { font-size: clamp(2rem, 6.5vw, 5.8rem); text-transform: uppercase; }
+.cta { position: fixed; left: 50%; bottom: 2rem; transform: translateX(-50%); border-radius: 999px; border: 1px solid #2d2d31; background: #fff; color: #2d2d31; padding: .9rem 1.3rem; text-transform: uppercase; letter-spacing: .16em; }
+.cta.armed { background: #121214; color: #fff; cursor: pointer; }
+.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: grid; place-items: center; }
+.modal { width: min(640px, 92vw); background: #fff; border-radius: 10px; padding: 1rem; }
+.modal form { display: grid; gap: .65rem; }
+.modal input { width: 100%; padding: .7rem; border: 1px solid #ccc; }
+.modal button { width: fit-content; background: #121214; color: #fff; border: 0; border-radius: 6px; padding: .6rem .9rem; }
+@media (max-width: 900px) {
+  .scene-2 { grid-template-columns: 1fr; }
+  .frame { width: 92vw; }
+  .subject, .side { position: static; width: 60vw; max-width: 320px; margin: 1rem auto 0; }
+}
