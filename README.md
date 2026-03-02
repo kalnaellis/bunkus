@@ -36,12 +36,3 @@ npm run dev
 npm run build
 npm run preview
 ```
-
-
-## Troubleshooting
-
-- If your browser still shows requests to `main.jsx`, clear cache/hard refresh and ensure you open `index.html` (which now boots from `src/main.js`).
-- If you see `Failed to load module script ... MIME type of "text/jsx"`, your environment is serving `.jsx` directly without Vite transforms. This repo now uses `src/main.js` in `index.html` so static servers can render content too.
-- If `/favicon.ico` is missing, use the included `public/favicon.svg` reference in `index.html`.
-
-- `refresh.js` WebSocket errors usually come from a local live-reload helper/extension and do not block app rendering. You can ignore it or disable that extension/tool.
