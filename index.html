@@ -3,70 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Case Closed / Lips Glossed</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <title>BUNKUS</title>
+    <link rel="icon" type="image/svg+xml" href="./public/favicon.svg" />
+    <link rel="stylesheet" href="./src/styles.css" />
   </head>
   <body>
-    <div class="bg" id="bg"></div>
-
-    <main id="scrollRoot">
-      <section class="story">
-        <p class="hash" id="hashLine"></p>
-        <h1 id="headline">NOT YOUR REGULAR LAWYER</h1>
-        <p class="sub">A typographic intake narrative. Scroll to arm the case-seal action and unlock submission.</p>
-      </section>
-
-      <aside class="card hidden" id="sideCard">
-        <p class="label">Case card</p>
-        <p class="card-title">Case closed / lips glossed</p>
-        <svg viewBox="0 0 160 120" fill="none">
-          <path d="M12 88 C48 28, 112 28, 148 88" stroke="currentColor" stroke-width="2" />
-          <circle cx="80" cy="56" r="18" stroke="currentColor" stroke-width="2" />
-          <path d="M74 56 L78 60 L86 52" stroke="currentColor" stroke-width="2" />
-        </svg>
-      </aside>
-
-      <div class="spacer"></div>
-    </main>
-
-    <button id="cta" disabled>Seal your case in one click</button>
-
-    <dialog id="intakeModal">
-      <form id="intakeForm" method="dialog">
-        <div class="modal-head">
-          <h2>Seal your case</h2>
-          <button type="button" id="closeModal">Close</button>
-        </div>
-
-        <div id="caseRef" class="case-ref hidden"></div>
-
-        <div id="formStep">
-          <input name="name" id="name" placeholder="Name" required minlength="2" />
-          <input name="email" id="email" placeholder="Email" type="email" required />
-          <label><input type="checkbox" id="consent" required /> I confirm these files are mine to share and I agree to the processing of my data for case evaluation.</label>
-          <button type="button" class="link" id="openLegal">Privacy / data processing notice</button>
-          <button type="submit">Submit details</button>
-        </div>
-
-        <div id="uploadStep" class="hidden">
-          <input id="files" type="file" multiple />
-          <button type="button" id="uploadBtn">Upload files</button>
-        </div>
-
-        <p id="status"></p>
-      </form>
-    </dialog>
-
-    <dialog id="legalModal">
-      <h3>Privacy / data processing notice</h3>
-      <ul>
-        <li>Retention: up to 12 months unless engagement starts sooner.</li>
-        <li>Access: internal legal staff and approved processors.</li>
-        <li>Deletion: request by replying to your case confirmation email.</li>
-      </ul>
-      <button id="closeLegal">Close</button>
-    </dialog>
-
-    <script src="./script.js"></script>
+    <div id="root"></div>
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>
