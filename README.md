@@ -1,17 +1,27 @@
-# Bunkus — scroll editorial intake (Vite + React)
+# BUNKUS — Pass 1 landing page (Vite + React)
 
-This repo is now aligned for **GitHub Pages static hosting** + **separate backend endpoint** for intake/upload.
+One-page cinematic lawyer landing page for GitHub Pages at:
+`https://kalnaellis.github.io/bunkus/`
 
-## What is implemented
+## Implemented in Pass 1
 
-- Vite + React scaffold (`src/`, `vite.config.ts`) with `base: '/bunkus/'` for GH Pages.
-- 4 pinned scroll scenes using GSAP ScrollTrigger.
-- WebGL background (R3F shader) with low-cost grain and Scene 4 cursor sparkle reaction.
-- Scene 2 16:9 reveal composition (image + subject layer + side text).
-- Scene 3 recomposition transform.
-- Scene 4 CTA arming + modal intake UI with backend stub calls.
-- GitHub Actions workflow to build/deploy `dist/` to Pages.
-- `.nojekyll` for Pages compatibility.
+- Vite + React single-page app (no router).
+- Sticky top micro-strip nav (`BUNKUS` + `Seal your case` jump link).
+- 4 poster-style sections with required copy.
+- Section 2 and 3 16:9 image frames using `public/image-placeholder.svg` placeholder.
+- Inline intake flow state machine:
+  - State A: CTA only
+  - State B: required intake form + validation + errors
+  - State C: upload UI with drag/drop + multiple file select + file list
+- `localStorage` persistence:
+  - `bunkus_intake`
+  - `bunkus_files`
+- Responsive desktop/mobile layout and visible keyboard focus styles.
+
+## Placeholder image note
+
+`public/image-placeholder.svg` is a text-based placeholder so PR/diff tools that do not support binaries can still process changes.
+Replace image URLs or add real JPG assets later when your workflow supports binary files.
 
 ## Local run
 
@@ -20,11 +30,9 @@ npm install
 npm run dev
 ```
 
-## Backend architecture (required in production)
+## Build
 
-Because GitHub Pages is static, keep secrets server-side:
-
-- `POST /case` on Cloudflare Worker / Vercel / Netlify / Apps Script.
-- `POST /upload` endpoint for file handling and Sheets row updates.
-
-Update the frontend endpoint URL in `src/App.jsx` (`https://example-worker.dev/case`).
+```bash
+npm run build
+npm run preview
+```
