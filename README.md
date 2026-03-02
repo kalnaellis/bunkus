@@ -36,9 +36,3 @@ npm run dev
 npm run build
 npm run preview
 ```
-
-
-## Troubleshooting
-
-- If you see `Failed to load module script ... MIME type of "text/jsx"`, your environment is serving `.jsx` directly without Vite transforms. This repo now uses `src/main.js` in `index.html` so static servers can render content too.
-- If `/favicon.ico` is missing, use the included `public/favicon.svg` reference in `index.html`.
